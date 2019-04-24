@@ -1,3 +1,8 @@
+# Define SSH key pair for our instances
+resource "aws_key_pair" "LAMP_key_pair" {
+  key_name = "LAMP_kp"
+  public_key = "${file("~/.ssh/pemfile/LAMP_kp.pub")}"
+}
 
 # Define Ansible Bastion Host in public subnet
 resource "aws_instance" "ansible-server" {
