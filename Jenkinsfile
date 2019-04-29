@@ -1,40 +1,11 @@
 // Jenkinsfile
-String credentialsId = 'AWS-Jenkins-Integration'
-
-try {
-  stage('checkout') {
-    node {
-      cleanWs()
-      checkout scm
+node("master") {
+    stage("Prep") {
+        deleteDir() // Clean up the workspace
+        checkout scm
+        withCredentials([file(credentialsId: 'AWS-Jenkins-Integration', variable: 'tfvars')]) {
+            sh "cp $tfvars terraform.tfvars"
+        }
+        sh "terraform init --get=true"
     }
-  }
-
-// Run terraform init
-  stage ('Terraform Init') {
-    print "Init Provider" 
-    ansiColor('xterm') {
-      sh "cd terraform-project/terraform-templates && /usr/local/bin/terraform init"
-    }
-  }
-
-// Run terraform validate
-  stage ('Terraform Validate') {
-    print "Validating The TF Files"
-    sh "cd terraform-project/terraform-templates && /usr/local/bin/terraform validate -var-file=${environment}-secrets.tfvars"
-  }
 }
-
-
-catch (caughtError) {
-  err = caughtError
-  currentBuild.result = "FAILURE"
-}
-
-finally {
-  /* Must re-throw exception to propagate error */
-  if (err) {
-    throw err
-  }
-}
-
-
