@@ -15,7 +15,7 @@ node("master") {
 
   // Run terraform plan
   stage ('Terraform Plan') {
-    sh "cd /var/lib/jenkins/workspace/Terraform-VPC-New_master && /usr/local/bin/terraform plan -out=create.tfplan /var/lib/jenkins/workspace/Terraform-VPC-New_master"
+    sh "cd /var/lib/jenkins/workspace/Terraform-VPC-New_master && /usr/local/bin/terraform plan -out=create.tfplan"
   }
 
   // Run terraform apply
