@@ -19,4 +19,9 @@ node("master") {
   stage ('Terraform Plan') {
     sh "cd /var/lib/jenkins/workspace/Terraform-VPC_master/ && /usr/local/bin/terraform plan"
   }
+
+  // Run terraform apply
+  stage ('Terraform Apply') {
+    sh "cd /var/lib/jenkins/workspace/Terraform-VPC_master/ && /usr/local/bin/terraform apply -auto-approve"
+  }
 }
