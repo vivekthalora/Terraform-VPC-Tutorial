@@ -4,17 +4,13 @@ node("master") {
   def environment = "Development"
   // Git checkout
   stage('checkout') {
-    node {
-      cleanWs()
-      checkout scm
-    }
+    cleanWs()
+    checkout scm
   }
 
   // Run terraform init
   stage ('Terraform Init') {
-    node {
-      sh "cd /var/lib/jenkins/workspace/Terraform-VPC_master && /usr/local/bin/terraform init"
-    }
+    sh "cd /var/lib/jenkins/workspace/Terraform-VPC_master && /usr/local/bin/terraform init"
   }
 
   // Run terraform plan
