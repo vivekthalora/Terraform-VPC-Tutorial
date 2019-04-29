@@ -13,6 +13,6 @@ node("master") {
   // Run terraform init
   stage ('Terraform Init') {
     print "Init Provider"
-    sh "cd Terraform-VPC_master/ && /usr/local/bin/terraform init"
+    sh "cd ./Terraform-VPC_master/ && /usr/local/bin/terraform init"
   }
 }
