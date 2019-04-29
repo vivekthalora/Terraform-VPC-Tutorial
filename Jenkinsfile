@@ -15,8 +15,16 @@ node("master") {
 
   // Run terraform plan
   stage ('Terraform Plan') {
-    sh "terraform plan -out=plan.out -no-color"
-    //sh "cd /var/lib/jenkins/workspace/Terraform-VPC-New_master && /usr/local/bin/terraform plan -out=create.tfplan"
+    withCredentials([[
+        $class: 'AmazonWebServicesCredentialsBinding',
+        credentialsId: credentialsId,
+        accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+        secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+    ]])
+    {
+      sh "terraform plan -out=plan.out -no-color"
+      //sh "cd /var/lib/jenkins/workspace/Terraform-VPC-New_master && /usr/local/bin/terraform plan -out=create.tfplan"
+    }
   }
 
   // Run terraform apply
