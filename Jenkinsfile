@@ -11,7 +11,9 @@ try {
 
   stage ('Terraform Init') {
     print "Init Provider" 
-    sh "cd terraform-project/terraform-templates && /usr/local/bin/terraform init"
+    ansiColor('xterm') {
+      sh "cd terraform-project/terraform-templates && /usr/local/bin/terraform init"
+    }
   }
 }
 
