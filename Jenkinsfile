@@ -5,7 +5,6 @@ node("master") {
   // Git checkout
   stage('checkout') {
     node {
-      cleanWs()
       checkout scm
     }
   }
