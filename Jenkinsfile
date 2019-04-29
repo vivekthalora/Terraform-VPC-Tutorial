@@ -14,7 +14,7 @@ node("master") {
   stage ('Terraform Init') {
     print "Init Provider"
     ansiColor('xterm') {
-      sh "cd Terraform-VPC_master/ && /usr/local/bin/terraform init"
+      sh "cd Terraform-VPC_master && /usr/local/bin/terraform init"
     }
   }
 }
