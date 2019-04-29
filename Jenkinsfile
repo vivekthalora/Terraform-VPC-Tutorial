@@ -1,12 +1,20 @@
 // Jenkinsfile
 node("master") {
   String credentialsId = 'AWS-Jenkins-Integration'
-  stage("Prep") {
-    deleteDir() // Clean up the workspace
-    checkout scm
-    withCredentials([file(credentialsId: 'AWS-Jenkins-Integration', variable: 'tfvars')]) {
-      sh "cp $tfvars terraform.tfvars"
+
+  // Git checkout
+  stage('checkout') {
+    node {
+      cleanWs()
+      checkout scm
     }
-    sh "terraform init --get=true"
+  }
+
+  // Run terraform init
+  stage ('Terraform Init') {
+    print "Init Provider"
+    ansiColor('xterm') {
+      sh "cd terraform-project/terraform-templates && /usr/local/bin/terraform init"
+    }
   }
 }
