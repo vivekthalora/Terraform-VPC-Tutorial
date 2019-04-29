@@ -12,13 +12,13 @@ node("master") {
 
   // Run terraform init
   stage ('Terraform Init') {
-    sh "/usr/local/bin/terraform init /var/lib/jenkins/workspace/Terraform-VPC_master/"
+    sh "cd /var/lib/jenkins/workspace/Terraform-VPC_master && /usr/local/bin/terraform init"
   }
 
   // Run terraform plan
-  stage ('Terraform Plan') {
-    sh "/usr/local/bin/terraform plan -out=create.tfplan /var/lib/jenkins/workspace/Terraform-VPC_master/"
-  }
+  //stage ('Terraform Plan') {
+  //  sh "/usr/local/bin/terraform plan -out=create.tfplan /var/lib/jenkins/workspace/Terraform-VPC_master/"
+  //}
 
   // Run terraform apply
   //stage ('Terraform Apply') {
