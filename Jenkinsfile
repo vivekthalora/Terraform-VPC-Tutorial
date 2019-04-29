@@ -22,6 +22,6 @@ node("master") {
 
   // Run terraform apply
   stage ('Terraform Apply') {
-    sh "cd /var/lib/jenkins/workspace/Terraform-VPC_master/ && /usr/local/bin/terraform apply"
+    sh "ls /var/lib/jenkins/workspace/Terraform-VPC_master; /usr/local/bin/terraform apply /var/lib/jenkins/workspace/Terraform-VPC_master"
   }
 }
