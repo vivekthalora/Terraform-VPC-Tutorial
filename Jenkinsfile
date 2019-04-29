@@ -12,7 +12,15 @@ node("master") {
 
   // Run terraform init
   stage ('Terraform Init') {
-    print "Init Provider"
-    sh "cd /var/lib/jenkins/workspace/Terraform-VPC_master/ && /usr/local/bin/terraform init"
+    ansiColor('xterm') {
+      sh "cd /var/lib/jenkins/workspace/Terraform-VPC_master/ && /usr/local/bin/terraform init"
+    }
+  }
+
+  // Run terraform plan
+  stage ('Terraform Plan') {
+    ansiColor('xterm') {
+      sh "cd /var/lib/jenkins/workspace/Terraform-VPC_master/ && /usr/local/bin/terraform plan"
+    }
   }
 }
